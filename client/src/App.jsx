@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import Axios from "axios";
+
 import "./App.css";
 
 function App() {
@@ -9,8 +11,26 @@ function App() {
     const [position, setPosition] = useState("");
     const [wage, setWage] = useState(0);
 
-    const displayInfo = () => {
-        console.log(name + age + country + position + wage);
+    const [employeeList, setEmployeeList] = useState([]);
+
+    //envia as informações para o back end
+    const addEmployee = () => {
+        Axios.post("http://localhost:3000/create", {
+            name: name,
+            age: age,
+            country: country,
+            position: position,
+            wage: wage,
+        }).then(() => {
+            console.log("dados enviados ao back end");
+        });
+    };
+
+    //puxa do back end os dados para o front end
+    const getEmployees = () => {
+        Axios.get("http://localhost:3000/employees").then((response) => {
+            setEmployeeList(response.data);
+        });
     };
 
     return (
@@ -30,7 +50,7 @@ function App() {
                         setAge(event.target.value);
                     }}
                 />
-                <label>Estado:</label>
+                <label>País:</label>
                 <input
                     type="text"
                     onChange={(event) => {
@@ -51,7 +71,23 @@ function App() {
                         setWage(event.target.value);
                     }}
                 />
-                <button onClick={displayInfo}>Cadastrar</button>
+                <button onClick={addEmployee}>Cadastrar</button>
+            </div>
+            <hr style={{ width: 1000 }} />
+            <div className="employees">
+                <button onClick={getEmployees}>Mostrar Funcionários</button>
+
+                {employeeList.map((value, key) => {
+                    return (
+                        <div className="employee-values">
+                            <h3 className="employee-item">{value.name}</h3>
+                            <h3 className="employee-item">{value.age}</h3>
+                            <h3 className="employee-item">{value.country}</h3>
+                            <h3 className="employee-item">{value.position}</h3>
+                            <h3 className="employee-item">{value.wage}</h3>
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
