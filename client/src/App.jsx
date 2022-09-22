@@ -86,29 +86,29 @@ function App() {
             <hr style={{ width: 1000 }} />
             <div className="employees">
                 <h2>Lista de Funcionários</h2>
-                <button onClick={getEmployees}>Atualizar Lista</button>
-
-                {employeeList.map((value, key) => {
-                    return (
-                        <div className="employee-values">
-                            <h3 className="employee-item">
-                                Nome: {value.name}
-                            </h3>
-                            <h3 className="employee-item">
-                                Idade: {value.age}
-                            </h3>
-                            <h3 className="employee-item">
-                                País: {value.country}
-                            </h3>
-                            <h3 className="employee-item">
-                                Cargo: {value.position}
-                            </h3>
-                            <h3 className="employee-item">
-                                Salário: {value.wage}
-                            </h3>
-                        </div>
-                    );
-                })}
+                <button onClick={getEmployees}>Visualizar Funcionários</button>
+                <div className="table-container">
+                    <table>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Idade</th>
+                            <th>País</th>
+                            <th>Cargo</th>
+                            <th>Salário</th>
+                        </tr>
+                        {employeeList.map((value, key) => {
+                            return (
+                                <tr>
+                                    <td>{value.name}</td>
+                                    <td>{value.age}</td>
+                                    <td>{value.country}</td>
+                                    <td>{value.position}</td>
+                                    <td>{value.wage}</td>
+                                </tr>
+                            );
+                        })}
+                    </table>
+                </div>
             </div>
         </div>
     );

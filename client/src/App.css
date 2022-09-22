@@ -14,7 +14,6 @@
 }
 
 .form label {
-    display: flex;
     align-self: flex-start;
     margin-top: 1rem;
 }
@@ -50,6 +49,10 @@
     justify-content: center;
 }
 
+.employees h2 {
+    margin-top: 1rem;
+}
+
 .employees button {
     padding: 20px;
     border: none;
@@ -65,11 +68,19 @@
 .employees button:hover {
     background-color: #6799ef;
 }
-
-.employee-values {
-    display: flex;
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.employee-item {
-    margin: 0.5rem;
+.table-container tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.table-container td,
+.table-container th {
+    width: 200px;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
