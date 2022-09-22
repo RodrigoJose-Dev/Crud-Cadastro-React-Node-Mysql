@@ -22,7 +22,16 @@ function App() {
             position: position,
             wage: wage,
         }).then(() => {
-            console.log("dados enviados ao back end");
+            setEmployeeList([
+                ...employeeList,
+                {
+                    name: name,
+                    age: age,
+                    country: country,
+                    position: position,
+                    wage: wage,
+                },
+            ]);
         });
     };
 
@@ -36,6 +45,7 @@ function App() {
     return (
         <div className="App">
             <div className="form">
+                <h2>Cadastro de Funcionários</h2>
                 <label>Nome:</label>
                 <input
                     type="text"
@@ -75,16 +85,27 @@ function App() {
             </div>
             <hr style={{ width: 1000 }} />
             <div className="employees">
-                <button onClick={getEmployees}>Mostrar Funcionários</button>
+                <h2>Lista de Funcionários</h2>
+                <button onClick={getEmployees}>Atualizar Lista</button>
 
                 {employeeList.map((value, key) => {
                     return (
                         <div className="employee-values">
-                            <h3 className="employee-item">{value.name}</h3>
-                            <h3 className="employee-item">{value.age}</h3>
-                            <h3 className="employee-item">{value.country}</h3>
-                            <h3 className="employee-item">{value.position}</h3>
-                            <h3 className="employee-item">{value.wage}</h3>
+                            <h3 className="employee-item">
+                                Nome: {value.name}
+                            </h3>
+                            <h3 className="employee-item">
+                                Idade: {value.age}
+                            </h3>
+                            <h3 className="employee-item">
+                                País: {value.country}
+                            </h3>
+                            <h3 className="employee-item">
+                                Cargo: {value.position}
+                            </h3>
+                            <h3 className="employee-item">
+                                Salário: {value.wage}
+                            </h3>
                         </div>
                     );
                 })}
